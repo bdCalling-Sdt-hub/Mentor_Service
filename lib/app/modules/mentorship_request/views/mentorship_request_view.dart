@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:mentors_service/app/modules/mentorship_request/widgets/mentor_request_sheet_item.dart';
 import 'package:mentors_service/app/modules/mentorship_request/widgets/mentorship_request_card.dart';
 import 'package:mentors_service/common/app_color/app_colors.dart';
 import 'package:mentors_service/common/app_icons/app_icons.dart';
@@ -43,7 +44,9 @@ class MentorshipRequestView extends StatelessWidget {
             AppCustomTextOrIconButton(
               height: 50.h,
               text: 'Create new request',
-              onTab: () {},
+              onTab: () {
+                showMentorshipRequestBottomSheet(context);
+              },
               isIconWithTextActive: true,
               iconPath: AppIcons.addIcon,
               iconHeight: 25.h,
@@ -54,4 +57,25 @@ class MentorshipRequestView extends StatelessWidget {
       ),
     );
   }
+
+  void showMentorshipRequestBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true, // Allows the bottom sheet to take up more space
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+      ),
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          left: 16.0,
+          right: 16.0,
+          top: 16.0,
+          bottom: MediaQuery.of(context).viewInsets.bottom + 16.0, // To handle keyboard overlay
+        ),
+        child: MentorRequestSheetItem(),
+      ),
+    );
+  }
 }
+
+

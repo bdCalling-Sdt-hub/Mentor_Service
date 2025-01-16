@@ -39,8 +39,12 @@ class HomeView extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 15.w),
                   child: NotificationAppBar(
-                    messageOnTap: () {},
-                    notificationOnTap: () {},
+                    messageOnTap: () {
+                      Get.toNamed(Routes.MESSAGE);
+                    },
+                    notificationOnTap: () {
+                      Get.toNamed(Routes.NOTIFICATION);
+                    },
                     messageCount: 3,
                     notificationCount: 5,
                   ),

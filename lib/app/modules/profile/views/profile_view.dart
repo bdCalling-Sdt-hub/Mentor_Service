@@ -6,8 +6,10 @@ import 'package:mentors_service/app/modules/mentorship_request/widgets/mentorshi
 import 'package:mentors_service/app/modules/profile/widgets/switch_visibility.dart';
 import 'package:mentors_service/app/modules/profile/widgets/title_and_button.dart';
 import 'package:mentors_service/app/modules/sign_up/widgets/switch_mentor_mentee.dart';
+import 'package:mentors_service/app/routes/app_pages.dart';
 import 'package:mentors_service/common/app_color/app_colors.dart';
 import 'package:mentors_service/common/app_icons/app_icons.dart';
+import 'package:mentors_service/common/app_images/network_image%20.dart';
 import 'package:mentors_service/common/app_string/app_string.dart';
 import 'package:mentors_service/common/app_text_style/style.dart';
 import 'package:mentors_service/common/widgets/app_custom_textOrIcon_button.dart';
@@ -37,9 +39,9 @@ class _ProfileViewState extends State<ProfileView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBarTitle(text: 'Profile'),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -50,183 +52,82 @@ class _ProfileViewState extends State<ProfileView> {
                   height: 40.h,
                   width: 130.w,
                   text: 'Edit Profile',
-                  onTab: () {},
+                  onTab: () {
+                    Get.toNamed(Routes.EDIT_PROFILE);
+                  },
                   isIconWithTextActive: true,
                   iconPath: AppIcons.editLogo,
                   iconHeight: 18.h,
                 ),
               ),
+
               /// Profile summery
               verticalSpacing(10.h),
-              ProfileSummeryCard(isDateActive: false,imageHeight: 120.h, imageWidth: 120.w,),
-              /// First name
-              verticalSpacing(15.h),
-              TextRequired(
-                text: AppString.firstNameText,
-                textStyle: AppStyles.h4(family: "Schuyler"),
+              ProfileSummeryCard(
+                isDateActive: false,
+                imageHeight: 120.h,
+                imageWidth: 120.w,
+                name: 'Shuvo Kh',
+                description: 'I want to learn how to fly and fighter jet from',
+                imageUrl: AppNetworkImage.golfPlayerImg,
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              Text(AppString.firstNameText,
+                  style: AppStyles.h4(family: "Schuyler")),
+              SizedBox(
+                height: 10.h,
+              ),
+              customListTile('Shuvo'),
+              SizedBox(height: 10.h),
+              Text(AppString.lastNameText,
+                  style: AppStyles.h4(family: "Schuyler")),
+              SizedBox(
+                height: 10.h,
+              ),
+              customListTile('Kh'),
+              SizedBox(height: 10.h),
+              Text(AppString.branchText, style: AppStyles.h3()),
+              SizedBox(height: 10.h),
+              customListTile(
+                'Navy',
               ),
               SizedBox(height: 10.h),
-              CustomTextField(
-                contentPaddingVertical: 15.h,
-                hintText: "Type your first name",
-                controller: _profileController.firstNameCtrl,
-              ),
-
-              /// Last name
-              verticalSpacing(10.h),
-              TextRequired(
-                text: AppString.lastNameText,
-                textStyle: AppStyles.h4(family: "Schuyler"),
+              Text(AppString.currentStatusText, style: AppStyles.h3()),
+              SizedBox(height: 10.h),
+              customListTile(
+                'Active',
               ),
               SizedBox(height: 10.h),
-              CustomTextField(
-                contentPaddingVertical: 15.h,
-                hintText: "Type your last name",
-                controller: _profileController.lastNameCtrl,
-              ),
-
-              /// Branch
-              SizedBox(height: 15.h),
-              TextRequired(
-                text: AppString.branchText,
-                textStyle: AppStyles.h4(family: "Schuyler"),
+              Text(AppString.instagramOptionalText, style: AppStyles.h3()),
+              SizedBox(height: 10.h),
+              customListTile(
+                'ShuvoKh153',
               ),
               SizedBox(height: 10.h),
-              DropdownButtonFormField<String>(
-                value: _profileController.branch,
-                padding: EdgeInsets.zero,
-                hint: const Text("Select Branch"),
-                items: _profileController.branchList
-                    .map(
-                      (gender) => DropdownMenuItem<String>(
-                        value: gender,
-                        child: Text(gender),
-                      ),
-                    )
-                    .toList(),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Select Branch';
-                  }
-                  return null;
-                },
-                onChanged: (newValue) {
-                  setState(() {
-                    _profileController.branch = newValue;
-                    print('Gender>>>${_profileController.branch}');
-                  });
-                },
+              Text(AppString.matchedMentorMenteeText,
+                  style: AppStyles.h4(family: "Schuyler")),
+              SizedBox(
+                height: 4.h,
               ),
-
-              /// Current status
-              SizedBox(height: 15.h),
-              TextRequired(
-                text: AppString.currentStatusText,
-                textStyle: AppStyles.h4(family: "Schuyler"),
-              ),
-              SizedBox(height: 15.h),
-              DropdownButtonFormField<String>(
-                value: _profileController.currentStatus,
-                padding: EdgeInsets.zero,
-                hint: const Text("Select current status "),
-                items: _profileController.currentStatusList
-                    .map(
-                      (gender) => DropdownMenuItem<String>(
-                        value: gender,
-                        child: Text(gender),
-                      ),
-                    )
-                    .toList(),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Select current status';
-                  }
-                  return null;
-                },
-                onChanged: (newValue) {
-                  setState(() {
-                    _profileController.currentStatus = newValue;
-                    print('Gender>>>${_profileController.currentStatus}');
-                  });
-                },
-              ),
-
-              /// Instagram Username
-              verticalSpacing(15.h),
-              Text(
-                AppString.instagramOptionalText,
-                style: AppStyles.h4(family: "Schuyler"),
-              ),
-              SizedBox(height: 10.h),
-              CustomTextField(
-                contentPaddingVertical: 15.h,
-                hintText: "Type your username",
-                controller: _profileController.instagramNameCtrl,
-              ),
-
-              /// Matched with Mentor/mentee
-              SizedBox(height: 15.h),
-              TextRequired(
-                text: AppString.matchedMentorMenteeText,
-                textStyle: AppStyles.h4(family: "Schuyler"),
-              ),
-              SizedBox(height: 10.h),
               UrbanistFont(
                   title: AppString.matchedMentorMenteeDescText,
                   color: AppColors.gray),
-              SizedBox(height: 16.h),
-              DropdownButtonFormField<String>(
-                value: _profileController.matchedInInstagram,
-                padding: EdgeInsets.zero,
-                hint: const Text("Select an option "),
-                items: _profileController.matchedInInstagramList
-                    .map(
-                      (gender) => DropdownMenuItem<String>(
-                        value: gender,
-                        child: Text(gender),
-                      ),
-                    )
-                    .toList(),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Select an option ';
-                  }
-                  return null;
-                },
-                onChanged: (newValue) {
-                  setState(() {
-                    _profileController.matchedInInstagram = newValue;
-                    print('Gender>>>${_profileController.matchedInInstagram}');
-                  });
-                },
-              ),
-
-              /// what type of mentor are you looking for
-              SizedBox(height: 15.h),
-              buildMentorMenteeDescriptionSupportText(),
-              SizedBox(height: 16.h),
-              Obx(() {
-                return CustomTextField(
-                  contentPaddingVertical: 15.h,
-                  maxLine: 4,
-                  hintText: "Enter description",
-                  controller: _profileController.role.value == 'Mentee'
-                      ? _profileController.whatTypeOfMenteeCtrl
-                      : _profileController.role.value == 'Mentor'
-                          ? _profileController.whatTypeOfMentorCtrl
-                          : _profileController.whatTypeOfMenteeCtrl,
-                );
-              }),
-              verticalSpacing(15.h),
+              SizedBox(height: 10.h),
+              customListTile('Yes'),
 
               /// Profile visibility
               SizedBox(height: 15.h),
-              TextRequired(
-                text: AppString.profileVisibilityText,
-                textStyle: AppStyles.h4(family: "Schuyler"),
+              Text(
+                AppString.profileVisibilityText,
+                style: AppStyles.h4(family: "Schuyler"),
               ),
               SizedBox(height: 10.h),
-              SwitchVisibility(profileController: _profileController),
+              customListTile(
+                'Visible',
+              ),
+
               verticalSpacing(40.h)
             ],
           ),
@@ -262,5 +163,24 @@ class _ProfileViewState extends State<ProfileView> {
     });
   }
 
-
+  customListTile(String title, {String? icon}) {
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(color: AppColors.primaryColor, width: 1),
+          color: AppColors.fillColor,
+          borderRadius: BorderRadius.circular(16).r),
+      child: ListTile(
+        // leading: SvgPicture.asset(icon??''),
+        title: Text(
+          title,
+          style: AppStyles.customSize(
+            size: 16,
+            fontWeight: FontWeight.w500,
+            color: AppColors.subTextColor,
+            family: "Schuyler",
+          ),
+        ),
+      ),
+    );
+  }
 }

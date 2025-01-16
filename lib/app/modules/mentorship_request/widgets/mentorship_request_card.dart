@@ -94,7 +94,7 @@ class _MentorShipRequestCardState extends State<MentorShipRequestCard> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return CustomDialogue();
+        return CustomDialogue(isConfirm: isConfirm,);
       },
     );
   }

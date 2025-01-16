@@ -6,6 +6,7 @@ import 'package:mentors_service/app/modules/add_goal/views/add_goal_view.dart';
 import 'package:mentors_service/app/routes/app_pages.dart';
 import 'package:mentors_service/common/app_color/app_colors.dart';
 import 'package:mentors_service/common/app_icons/app_icons.dart';
+import 'package:mentors_service/common/app_images/network_image%20.dart';
 import 'package:mentors_service/common/app_string/app_string.dart';
 import 'package:mentors_service/common/app_text_style/style.dart';
 import 'package:mentors_service/common/widgets/app_custom_textOrIcon_button.dart';
@@ -38,7 +39,12 @@ class _SendMessageViewState extends State<SendMessageView> {
             children: [
               /// Profile Summery card
               verticalSpacing(8.h),
-              ProfileSummeryCard(),
+              ProfileSummeryCard(
+                date: '12.12.25',
+                name: 'Shuvo Kh',
+                description: 'navy',
+                imageUrl: AppNetworkImage.golfPlayerImg,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.h),
                 child: Divider(

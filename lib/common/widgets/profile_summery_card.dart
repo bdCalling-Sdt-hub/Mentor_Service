@@ -9,11 +9,24 @@ import 'icon_and_text.dart';
 
 class ProfileSummeryCard extends StatelessWidget {
   const ProfileSummeryCard({
-    super.key, this.isDateActive = true, this.imageHeight, this.imageWidth,
+    super.key,
+    this.isDateActive = true,
+    this.imageHeight,
+    this.imageWidth,
+    required this.name,
+    required this.description,
+    required this.imageUrl,
+    this.date,
   });
- final bool isDateActive;
- final double? imageHeight;
- final double? imageWidth;
+
+  final bool isDateActive;
+  final double? imageHeight;
+  final double? imageWidth;
+  final String name;
+  final String description;
+  final String imageUrl;
+  final String? date;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -21,48 +34,54 @@ class ProfileSummeryCard extends StatelessWidget {
       children: [
         /// Profile Image
         CustomNetworkImage(
-          imageUrl: AppNetworkImage.golfPlayerImg,
-          height: imageHeight?? 86.h,
-          width: imageWidth?? 86.w,
+          imageUrl: imageUrl,
+          height: imageHeight ?? 86.h,
+          width: imageWidth ?? 86.w,
           boxShape: BoxShape.circle,
         ),
         const SizedBox(width: 13.0),
+
         /// Profile Details
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Name and Role
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children:  [
-                      Text(
-                        'John Doe',
-                        style: AppStyles.h2(),
-                      ),
-                      SizedBox(height: 4.0.h),
-                      Text(
-                        'Army',
-                        style: AppStyles.h4(color:Colors.grey ),
-                      ),
-                      verticalSpacing(4.0.h),
-                      if(isDateActive)
-                      SizedBox(
-                          width: 100.w,
-                          child: IconText(iconData: Icons.calendar_month_outlined, text: '12-12-25 '))
-                    ],
-                  ),
-                ],
+              Text(
+                name,
+                style: AppStyles.h2(),
+                maxLines: 1, // Restrict to one line
+                overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
+              ),
+
+              /// Description
+              SizedBox(height: 4.0.h),
+              Text(
+                description,
+                maxLines: 3, // Limit description to 3 lines
+                overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
+                style: AppStyles.h4(color: Colors.grey),
               ),
               const SizedBox(height: 8.0),
 
+              // Optional Date
+              if (isDateActive)
+                Row(
+                  children: [
+                    const Icon(Icons.calendar_month_outlined, size: 16,color: Colors.grey,),
+                    const SizedBox(width: 4.0),
+                    Text(
+                      date ?? 'N/A',
+                      style: AppStyles.h6(color: Colors.grey),
+                      overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
+                    ),
+                  ],
+                ),
             ],
           ),
         ),
       ],
     );
+
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:mentors_service/app/modules/profile/controllers/profile_controller.dart';
+import 'package:mentors_service/app/modules/profile/controllers/profile_update_conreoller.dart';
 import 'package:mentors_service/app/modules/sign_up/controllers/sign_up_controller.dart';
 import 'package:mentors_service/common/app_color/app_colors.dart';
 import 'package:mentors_service/common/app_string/app_string.dart';
@@ -9,10 +10,10 @@ import 'package:mentors_service/common/app_text_style/style.dart';
 import 'package:mentors_service/common/widgets/spacing.dart';
 
 class SwitchVisibility extends StatelessWidget {
-  const SwitchVisibility({super.key, required ProfileController profileController})
-      : _profileController = profileController;
+  const SwitchVisibility({super.key, required ProfileUpdateController profileUpdateController})
+      : _profileUpdateController = profileUpdateController;
 
-  final ProfileController _profileController;
+  final ProfileUpdateController _profileUpdateController;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +31,10 @@ class SwitchVisibility extends StatelessWidget {
                 Radius.circular(10.r),
               ),
             ),
-            value: _profileController.isVisibleChecked.value,
+            value: _profileUpdateController.isVisibleChecked.value,
             onChanged: (value) {
-              _profileController.isVisibleChecked.value = value ?? false;
-              _profileController.isHideChecked.value = false;
+              _profileUpdateController.isVisibleChecked.value = value ?? false;
+              _profileUpdateController.isHideChecked.value = false;
             },
           );
         }) ,
@@ -52,10 +53,10 @@ class SwitchVisibility extends StatelessWidget {
                   Radius.circular(10.r),
                 ),
               ),
-              value: _profileController.isHideChecked.value,
+              value: _profileUpdateController.isHideChecked.value,
               onChanged: (value) {
-                _profileController.isHideChecked.value = value ?? false;
-                _profileController.isVisibleChecked.value = false;
+                _profileUpdateController.isHideChecked.value = value ?? false;
+                _profileUpdateController.isVisibleChecked.value = false;
               },
             );
           }

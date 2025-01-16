@@ -46,8 +46,12 @@ class _FindMentorMenteeViewState extends State<FindMentorMenteeView> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10.h),
                 child: NotificationAppBar(
-                  messageOnTap: () {},
-                  notificationOnTap: () {},
+                  messageOnTap: () {
+                    Get.toNamed(Routes.MESSAGE);
+                  },
+                  notificationOnTap: () {
+                    Get.toNamed(Routes.NOTIFICATION);
+                  },
                   messageCount: 2,
                   notificationCount: 3,
                 ),

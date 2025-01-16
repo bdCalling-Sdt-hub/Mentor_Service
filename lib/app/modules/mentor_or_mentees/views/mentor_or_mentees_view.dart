@@ -7,6 +7,7 @@ import 'package:mentors_service/app/modules/bottom_menu/bottom_menu..dart';
 import 'package:mentors_service/app/modules/mentor_or_mentees/controllers/search_mentor_mentee_controller.dart';
 import 'package:mentors_service/app/modules/mentor_or_mentees/widgets/mentor_mentee_request_suggetion.dart';
 import 'package:mentors_service/app/modules/mentor_or_mentees/widgets/mentor_mentee_suggetion.dart';
+import 'package:mentors_service/app/routes/app_pages.dart';
 import 'package:mentors_service/common/app_color/app_colors.dart';
 import 'package:mentors_service/common/app_drawer/app_drawer.dart';
 import 'package:mentors_service/common/app_icons/app_icons.dart';
@@ -48,8 +49,12 @@ class _MentorOrMenteesViewState extends State<MentorOrMenteesView> {
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 15.w),
                         child: NotificationAppBar(
-                          messageOnTap: () {},
-                          notificationOnTap: () {},
+                          messageOnTap: () {
+                            Get.toNamed(Routes.MESSAGE);
+                          },
+                          notificationOnTap: () {
+                            Get.toNamed(Routes.NOTIFICATION);
+                          },
                           messageCount: 3,
                           notificationCount: 5,
                         ),

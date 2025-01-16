@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mentors_service/common/app_color/app_colors.dart';
+import 'package:mentors_service/common/app_images/network_image%20.dart';
 import 'package:mentors_service/common/app_string/app_string.dart';
 import 'package:mentors_service/common/app_text_style/style.dart';
 import 'package:mentors_service/common/widgets/custom_appBar_title.dart';
@@ -109,7 +110,12 @@ class _AppointmentFormScreenState extends State<AddScheduleView> {
                     /// profile summery
                     verticalSpacing(8.h),
                     if(!isEdit)
-                    ProfileSummeryCard(),
+                      ProfileSummeryCard(
+                        date: '12.12.25',
+                        name: 'Shuvo Kh',
+                        description: 'navy',
+                        imageUrl: AppNetworkImage.golfPlayerImg,
+                      ),
                   ],
                 ),
               ),

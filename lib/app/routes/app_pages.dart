@@ -20,9 +20,16 @@ import '../modules/mentor_or_mentees/bindings/mentor_or_mentees_binding.dart';
 import '../modules/mentor_or_mentees/views/mentor_or_mentees_view.dart';
 import '../modules/mentorship_request/bindings/mentorship_request_binding.dart';
 import '../modules/mentorship_request/views/mentorship_request_view.dart';
+import '../modules/message/bindings/message_binding.dart';
+import '../modules/message/views/message_view.dart';
+import '../modules/message_inbox/bindings/message_inbox_binding.dart';
+import '../modules/message_inbox/views/message_inbox_view.dart';
+import '../modules/notification/bindings/notification_binding.dart';
+import '../modules/notification/views/notification_view.dart';
 import '../modules/otp/bindings/otp_binding.dart';
 import '../modules/otp/views/otp_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/edit_profile_view.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/schedule_details/bindings/schedule_details_binding.dart';
 import '../modules/schedule_details/views/schedule_details_view.dart';
@@ -41,6 +48,8 @@ import '../modules/sign_up/views/role_and_profile_view.dart';
 import '../modules/sign_up/views/sign_up_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/support/bindings/support_binding.dart';
+import '../modules/support/views/support_view.dart';
 import '../modules/welcome/bindings/welcome_binding.dart';
 import '../modules/welcome/views/welcome_view.dart';
 
@@ -166,6 +175,31 @@ class AppPages {
       name: _Paths.MENTORSHIP_REQUEST,
       page: () => const MentorshipRequestView(),
       binding: MentorshipRequestBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PROFILE,
+      page: () => const EditProfileView(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.SUPPORT,
+      page: () => const SupportView(),
+      binding: SupportBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFICATION,
+      page: () => const NotificationView(),
+      binding: NotificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.MESSAGE,
+      page: () => const MessageView(),
+      binding: MessageBinding(),
+    ),
+    GetPage(
+      name: _Paths.MESSAGE_INBOX,
+      page: () => const MessageInboxView(),
+      binding: MessageInboxBinding(),
     ),
   ];
 }

@@ -27,6 +27,11 @@ abstract class Routes {
   static const EVENT_LIST = _Paths.EVENT_LIST;
   static const PROFILE = _Paths.PROFILE;
   static const MENTORSHIP_REQUEST = _Paths.MENTORSHIP_REQUEST;
+  static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
+  static const SUPPORT = _Paths.SUPPORT;
+  static const NOTIFICATION = _Paths.NOTIFICATION;
+  static const MESSAGE = _Paths.MESSAGE;
+  static const MESSAGE_INBOX = _Paths.MESSAGE_INBOX;
 }
 
 abstract class _Paths {
@@ -55,4 +60,9 @@ abstract class _Paths {
   static const EVENT_LIST = '/event-list';
   static const PROFILE = '/profile';
   static const MENTORSHIP_REQUEST = '/mentorship-request';
+  static const EDIT_PROFILE = '/edit-profile';
+  static const SUPPORT = '/support';
+  static const NOTIFICATION = '/notification';
+  static const MESSAGE = '/message';
+  static const MESSAGE_INBOX = '/message-inbox';
 }

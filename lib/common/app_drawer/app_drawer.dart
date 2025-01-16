@@ -22,126 +22,178 @@ class AppDrawer extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 10.w,vertical: 40.h),
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 40.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Menu',style: AppStyles.h2(fontWeight: FontWeight.w500)),
+                  Text('Menu',
+                      style: AppStyles.h2(fontWeight: FontWeight.w500)),
                   InkWell(
-                    onTap: (){
-                      Get.back();
-                    },
+                      onTap: () {
+                        Get.back();
+                      },
                       child: const Icon(Icons.close)),
-
                 ],
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 14.w),
-              child: Wrap(
-                runSpacing: 2,
-                children:[
-                  ListTile(
-                    title: Text(AppString.profileText,style: AppStyles.h3(),),
-                    leading: Icon(Icons.person_outline),
-                    horizontalTitleGap: 20.w,
-                    onTap: () {
-                      Navigator.pop(context);
-                      Get.toNamed(Routes.PROFILE);
-                    },
+              child: Wrap(runSpacing: 2, children: [
+                ListTile(
+                  title: Text(
+                    AppString.profileText,
+                    style: AppStyles.h3(),
                   ),
-                  ListTile(
-                    title: Text(AppString.eventText,style: AppStyles.h3(),),
-                    leading: Icon(Icons.event_note_outlined),
-                    horizontalTitleGap: 20.w,
-                    onTap: () {
-                      Navigator.pop(context);
-                      Get.toNamed(Routes.HOME);
-                    },
+                  leading: Icon(Icons.person_outline),
+                  horizontalTitleGap: 20.w,
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.toNamed(Routes.PROFILE);
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    AppString.eventText,
+                    style: AppStyles.h3(),
                   ),
-                  ListTile(
-                    title: Text(AppString.notificationText,style: AppStyles.h3(),),
-                    leading: Icon(Icons.notifications_none_outlined),
-                    horizontalTitleGap: 20.w,
-                    onTap: () {
-                      Navigator.pop(context);
-                      Get.toNamed(Routes.HOME);
-                    },
+                  leading: Icon(Icons.event_note_outlined),
+                  horizontalTitleGap: 20.w,
+                  trailing: Container(
+                    height: 12.h,
+                    width: 12.h,
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle
+                    ),
                   ),
-
-                  ListTile(
-                    title: Text(AppString.supportText,style: AppStyles.h3(),),
-                    leading: Icon(Icons.contact_support_outlined),
-                    horizontalTitleGap: 20.w,
-                    onTap: () {
-                      Navigator.pop(context);
-                      Get.toNamed(Routes.HOME);
-                    },
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.toNamed(Routes.EVENT_LIST);
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    AppString.notificationText,
+                    style: AppStyles.h3(),
                   ),
-
-                  ListTile(
-                    title: Text(AppString.scheduleText,style: AppStyles.h3(),),
-                    leading: Icon(Icons.schedule),
-                    horizontalTitleGap: 20.w,
-                    onTap: () {
-                      Navigator.pop(context);
-                      Get.toNamed(Routes.HOME);
-                    },
+                  leading: Icon(Icons.notifications_none_outlined),
+                  horizontalTitleGap: 20.w,
+                  trailing: Container(
+                    height: 12.h,
+                    width: 12.h,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle
+                    ),
                   ),
-                  ListTile(
-                    title: Text(AppString.mentorshipRequestsText,style: AppStyles.h3(),),
-                    leading: SvgPicture.asset(AppIcons.membershipRequestIcon,height: 32.h,colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn)),
-                    horizontalTitleGap: 20.w,
-                    onTap: () {
-                      Navigator.pop(context);
-                      Get.toNamed(Routes.MENTORSHIP_REQUEST);
-                    },
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.toNamed(Routes.NOTIFICATION);
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    AppString.supportText,
+                    style: AppStyles.h3(),
                   ),
-
-                  ListTile(
-                    title: Text(AppString.shopText,style: AppStyles.h3(),),
-                    leading: Icon(Icons.shopping_cart_outlined),
-                    horizontalTitleGap: 20.w,
-                    onTap: () {
-                      Navigator.pop(context);
-                      ExternalUrlLauncher.lunchUrl(ExternalUrl.shopUrl);
-                    },
+                  leading: Icon(Icons.contact_support_outlined),
+                  horizontalTitleGap: 20.w,
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.toNamed(Routes.SUPPORT);
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    AppString.scheduleText,
+                    style: AppStyles.h3(),
                   ),
-
-                  ListTile(
-                    title: Text(AppString.privacyPolicyText,style: AppStyles.h3(),),
-                    leading: Icon(Icons.privacy_tip_outlined),
-                    horizontalTitleGap: 20.w,
-                    onTap: () {
-                      Navigator.pop(context);
-                      ExternalUrlLauncher.lunchUrl(ExternalUrl.privacyPolicyUrl);
-                    },
+                  leading: Icon(Icons.schedule),
+                  horizontalTitleGap: 20.w,
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.toNamed(Routes.SCHEDULE_LIST);
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    AppString.mentorshipRequestsText,
+                    style: AppStyles.h3(),
                   ),
-                  ListTile(
-                    title: Text(AppString.termConditionText,style: AppStyles.h3(),),
-                    leading: SvgPicture.asset(AppIcons.termConditionIcon,height: 32.h,colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),),
-                    horizontalTitleGap: 20.w,
-                    onTap: () {
-                      Navigator.pop(context);
-                      ExternalUrlLauncher.lunchUrl(ExternalUrl.termsAndConditionsUrl);
-                    },
+                  leading: SvgPicture.asset(AppIcons.membershipRequestIcon,
+                      height: 32.h,
+                      colorFilter: const ColorFilter.mode(
+                          Colors.black, BlendMode.srcIn)),
+                  horizontalTitleGap: 20.w,
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.toNamed(Routes.MENTORSHIP_REQUEST);
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    AppString.shopText,
+                    style: AppStyles.h3(),
                   ),
-
-                  ListTile(
-                    title: Text(AppString.signOutText,style: AppStyles.h3(color: Colors.redAccent),),
-                    leading: SvgPicture.asset(AppIcons.logOutIcon,height: 32.h,colorFilter: const ColorFilter.mode(Colors.redAccent, BlendMode.srcIn),),
-                    horizontalTitleGap: 20.w,
-                    onTap: () {
-                      Navigator.pop(context);
-                      Get.toNamed(Routes.HOME);
-                    },
+                  leading: Icon(Icons.shopping_cart_outlined),
+                  horizontalTitleGap: 20.w,
+                  onTap: () {
+                    Navigator.pop(context);
+                    ExternalUrlLauncher.lunchUrl(ExternalUrl.shopUrl);
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    AppString.privacyPolicyText,
+                    style: AppStyles.h3(),
                   ),
-
-                ]
-              ),
+                  leading: Icon(Icons.privacy_tip_outlined),
+                  horizontalTitleGap: 20.w,
+                  onTap: () {
+                    Navigator.pop(context);
+                    ExternalUrlLauncher.lunchUrl(ExternalUrl.privacyPolicyUrl);
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    AppString.termConditionText,
+                    style: AppStyles.h3(),
+                  ),
+                  leading: SvgPicture.asset(
+                    AppIcons.termConditionIcon,
+                    height: 32.h,
+                    colorFilter:
+                        const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+                  ),
+                  horizontalTitleGap: 20.w,
+                  onTap: () {
+                    Navigator.pop(context);
+                    ExternalUrlLauncher.lunchUrl(
+                        ExternalUrl.termsAndConditionsUrl);
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    AppString.signOutText,
+                    style: AppStyles.h3(color: Colors.redAccent),
+                  ),
+                  leading: SvgPicture.asset(
+                    AppIcons.logOutIcon,
+                    height: 32.h,
+                    colorFilter: const ColorFilter.mode(
+                        Colors.redAccent, BlendMode.srcIn),
+                  ),
+                  horizontalTitleGap: 20.w,
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.toNamed(Routes.HOME);
+                  },
+                ),
+              ]),
             ),
-
-            SizedBox(height: 80.h,)
+            SizedBox(
+              height: 80.h,
+            )
           ],
         ),
       ),

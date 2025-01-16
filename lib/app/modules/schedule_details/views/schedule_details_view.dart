@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:mentors_service/app/routes/app_pages.dart';
 import 'package:mentors_service/common/app_color/app_colors.dart';
 import 'package:mentors_service/common/app_icons/app_icons.dart';
+import 'package:mentors_service/common/app_images/network_image%20.dart';
 import 'package:mentors_service/common/app_string/app_string.dart';
 import 'package:mentors_service/common/app_text_style/style.dart';
 import 'package:mentors_service/common/widgets/app_custom_textOrIcon_button.dart';
@@ -25,7 +26,12 @@ class ScheduleDetailsView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ProfileSummeryCard(),
+          ProfileSummeryCard(
+          date: '12.12.25',
+          name: 'Shuvo Kh',
+          description: 'navy',
+          imageUrl: AppNetworkImage.golfPlayerImg,
+        ),
             verticalSpacing(6.h),
             Divider(height: 2.h,color: AppColors.grayLight,),
             verticalSpacing(6.h),

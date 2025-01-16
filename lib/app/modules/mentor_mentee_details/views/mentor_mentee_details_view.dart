@@ -45,7 +45,12 @@ class _MentorMenteeDetailsViewState extends State<MentorMenteeDetailsView> {
                 children: [
                   /// Profile Summery
                   SizedBox(height: 16.h),
-                  ProfileSummeryCard(),
+                  ProfileSummeryCard(
+                    date: '12.12.25',
+                    name: 'Shuvo Kh',
+                    description: 'navy',
+                    imageUrl: AppNetworkImage.golfPlayerImg,
+                  ),
                   verticalSpacing(15.h),
                   /// Description
                    Text(
