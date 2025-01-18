@@ -102,7 +102,9 @@ class HomeView extends StatelessWidget {
                     TitleAndSeeAll(
                       title: 'Mentor Request',
                       count: 5,
-                      onTap: () {},
+                      onTap: () {
+                        Get.offAndToNamed(Routes.MENTOR_OR_MENTEES);
+                      },
                     ),
                     SizedBox(
                       height: 180.h,
@@ -117,7 +119,9 @@ class HomeView extends StatelessWidget {
                     TitleAndSeeAll(
                       title: 'My Mentor',
                       count: 3,
-                      onTap: () {},
+                      onTap: () {
+                        Get.offAndToNamed(Routes.MENTOR_OR_MENTEES);
+                      },
                     ),
                     SizedBox(
                       height: 190.h,

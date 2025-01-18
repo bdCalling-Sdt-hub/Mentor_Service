@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
     if (token.isNotEmpty) {
       return Routes.HOME;
     } else {
-      return Routes.HOME; //AppPages.INITIAL
+      return AppPages.INITIAL;
     }
   }
 }

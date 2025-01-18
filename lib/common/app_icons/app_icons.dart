@@ -11,6 +11,8 @@ class AppIcons{
   static String home_1Icon="$baseUrl/home_1.svg";
   static String membershipRequestIcon="$baseUrl/membership_request.svg";
   static String termConditionIcon="$baseUrl/term_condition.svg";
+  static String sendLargeIcon="$baseUrl/send_large.svg";
+  static String linkIcon="$baseUrl/link_icon.svg";
 
   /// for golf
   static String homesIcon="$baseUrl/home_icon.svg";

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class SendMessageController extends GetxController {
+class SendConnectionController extends GetxController {
   //TODO: Implement SendMessageController
 
   final count = 0.obs;

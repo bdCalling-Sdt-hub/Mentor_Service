@@ -16,14 +16,14 @@ import 'package:mentors_service/common/widgets/custom_text_field.dart';
 import 'package:mentors_service/common/widgets/profile_summery_card.dart';
 import 'package:mentors_service/common/widgets/spacing.dart';
 
-class SendMessageView extends StatefulWidget {
-  const SendMessageView({super.key});
+class SendConnectionView extends StatefulWidget {
+  const SendConnectionView({super.key});
 
   @override
-  State<SendMessageView> createState() => _SendMessageViewState();
+  State<SendConnectionView> createState() => _SendConnectionViewState();
 }
 
-class _SendMessageViewState extends State<SendMessageView> {
+class _SendConnectionViewState extends State<SendConnectionView> {
   TextEditingController msgTec = TextEditingController();
   bool _isTextExpanded = false;
 

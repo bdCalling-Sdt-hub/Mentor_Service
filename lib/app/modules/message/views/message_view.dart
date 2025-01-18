@@ -40,7 +40,7 @@ class _MessageViewState extends State<MessageView> {
               iconOnTap: () {},
               onChanged: (value) {},
               suffixIcon: Icons.tune,
-              fillColor: AppColors.primaryColor.withOpacity(0.2),
+              fillColor: AppColors.primaryColor.withOpacity(0.1),
             ),
 
             /// Friend List
@@ -98,7 +98,7 @@ class _MessageViewState extends State<MessageView> {
                           ),
                           child: Center(
                             child: Text(
-                              '100',
+                              '9+',
                               textAlign: TextAlign.center,
                               style: AppStyles.h6(color: Colors.white),
                             ),

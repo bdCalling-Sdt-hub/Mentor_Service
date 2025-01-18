@@ -13,7 +13,7 @@ class EventListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBarTitle(text: 'Event List'),
+      appBar: const CustomAppBarTitle(text: 'Events'),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8.w),
         child: ListView.builder(
