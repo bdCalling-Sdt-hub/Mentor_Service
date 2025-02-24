@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mentors_service/app/routes/app_pages.dart';
 import 'package:mentors_service/common/app_color/app_colors.dart';
 import 'package:mentors_service/common/app_icons/app_icons.dart';
@@ -106,18 +107,78 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
               CustomButton(
                   onTap: () async {
                     if (_formKey.currentState!.validate()) {
-                      //await otpController.sendOtp(isResetPassword);
-                      Get.offNamed(Routes.SIGN_IN);
+                     await _changePasswordController.resetPassword(function: (){
+                      return showStatusOnChangePasswordResponse(context);
+                     });
+
                     }
                   },
                   text: AppString.confirmText),
-              Spacer(flex: 2,),
+              const Spacer(flex: 2,),
             ],
           ),
         ),
       ),
     );
   }
+  void showStatusOnChangePasswordResponse(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      enableDrag: false,
+      isDismissible: false,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0.r)),
+      ),
+      isScrollControlled: true,
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            left: 16.0,
+            right: 16.0,
+            top: 16.0,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 16.0,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 20.h),
+              SizedBox(
+                height: 170.h,
+                child: Lottie.asset('assets/lotti/success_lotti.json'),
+              ),
+              SizedBox(height: 20.h),
+              // Text
+              Text(
+                AppString.passwordChangedText,
+                style:
+                const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              ),
+              SizedBox(height: 10.h),
+              Text(
+                AppString.returnToTheLoginPageText,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(height: 20.h),
+              // Elevated Button
+              Padding(
+                padding: EdgeInsets.only(bottom: 20.h),
+                child: CustomButton(
+                    onTap: () {
+                      Get.offNamed(Routes.SIGN_IN);
+                    },
+                    text: 'Back To Login'),
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   void dispose() {
     _changePasswordController.newPassCtrl.clear();

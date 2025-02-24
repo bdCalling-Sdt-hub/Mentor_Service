@@ -26,7 +26,7 @@ class _OtpViewState extends State<OtpView> {
   OtpController otpController = Get.put(OtpController());
   ResendOtpController resendOtpController = Get.put(ResendOtpController());
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  int _start = 59; // 3 min
+  int _start = 159; // 3 min
   Timer _timer = Timer(const Duration(seconds: 1), () {});
 
   startTimer() {
@@ -84,7 +84,7 @@ class _OtpViewState extends State<OtpView> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(height: 55.h),
-                buildOtpSupportText(email:'Shuvo.office52@gmail.com'),
+                buildOtpSupportText(email:Get.arguments['email'].toString()),
                 SizedBox(height: 30.h),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -135,14 +135,13 @@ class _OtpViewState extends State<OtpView> {
                       return CustomButton(
                           loading: otpController.verifyLoading.value,
                           onTap: () async {
-                            if(isResetPassword){
-                              Get.toNamed(Routes.CHANGE_PASSWORD,/*arguments: {'email': Get.arguments['email']}*/);
-                            }else{
-                              Get.toNamed(Routes.SIGN_IN);
-                            }
-
+                            // if(isResetPassword){
+                            //   Get.toNamed(Routes.CHANGE_PASSWORD,/*arguments: {'email': Get.arguments['email']}*/);
+                            // }else{
+                            //   Get.toNamed(Routes.SIGN_IN);
+                            // }
                             if (_formKey.currentState!.validate()) {
-                              //await otpController.sendOtp(isResetPassword);
+                              await otpController.sendOtp(isResetPassword);
                             }
                           },
                           text: AppString.confirmText);
@@ -154,7 +153,7 @@ class _OtpViewState extends State<OtpView> {
                     timerText == "00:00"
                         ? InkWell(
                             onTap: () {
-                              resendOtpController.sendMail(false);
+                              resendOtpController.reSendMail(false);
                               _start = 150;
                               startTimer();
                               setState(() {});
@@ -183,8 +182,7 @@ class _OtpViewState extends State<OtpView> {
                                 ),
                               ],
                             ),
-                          )
-                        : const SizedBox(),
+                          ) : const SizedBox(),
                   ],
                 ),
                 // const Spacer(),

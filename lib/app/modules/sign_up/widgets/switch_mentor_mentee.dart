@@ -30,7 +30,7 @@ class SwitchMentorMentee extends StatelessWidget {
             onChanged: (value) {
               _signUpController.isMenteeChecked.value = value ?? false;
               _signUpController.isMentorChecked.value = false;
-              _signUpController.role.value = value == true ? 'Mentee' : '';
+              _signUpController.role.value = value == true ? 'mentee' : '';
              _signUpController.whatTypeOfMentorCtrl.clear();
             },
           );
@@ -53,7 +53,7 @@ class SwitchMentorMentee extends StatelessWidget {
             onChanged: (value) {
               _signUpController.isMentorChecked.value = value ?? false;
               _signUpController.isMenteeChecked.value = false;
-              _signUpController.role.value=value==true?'Mentor' : '';
+              _signUpController.role.value=value==true?'mentor' : '';
               _signUpController.whatTypeOfMenteeCtrl.clear();
             },
           );

@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mentors_service/app/data/api_constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:mentors_service/app/routes/app_pages.dart';
 
 class ForgotPasswordController extends GetxController {
   TextEditingController emailCtrl = TextEditingController();
@@ -19,7 +21,7 @@ class ForgotPasswordController extends GetxController {
       return; // Prevent multiple taps
     }
 
-    isLoading.value = true; // Start loading
+    isLoading.value = true;
     Map<String, String> headers = {
       'Content-Type': 'application/json',
     };
@@ -38,26 +40,33 @@ class ForgotPasswordController extends GetxController {
         ..headers.addAll(headers)
         ..body = jsonEncode(body);
 
-      // Send the request and get the streamed response
       final streamedResponse = await request.send();
-
-      // Convert streamed response to a regular response
       final response = await http.Response.fromStream(streamedResponse);
-
+      var responseData = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        var responseData = jsonDecode(response.body);
         print('Response Data: $responseData');
-        // Get.toNamed(Routes.otpScreen, arguments: {
-        //   'email': emailCtrl.text,
-        //   'isPassreset': isResetPass ?? false,
-        // });
+       String resetToken = responseData['data']['attributes']['resetPasswordToken'];
+        Get.snackbar(responseData['message'], '');
+        Get.toNamed(Routes.OTP, arguments: {'email': emailCtrl.text, 'isResetPass': isResetPass ?? false,'verificationToken': resetToken });
       } else {
         print('Error: ${response.statusCode}, Message: ${response.body}');
+        Get.snackbar(responseData['message'], '');
       }
-    } catch (e) {
-      print('Error during API call: $e');
+    } on SocketException catch (_) {
+      Get.snackbar(
+        'Error',
+        'No internet connection. Please check your network and try again.',
+        snackPosition: SnackPosition.TOP,
+      );
+    }catch(e){
+      Get.snackbar(
+        'Error',
+        'Something went wrong. Please try again later.',
+        snackPosition: SnackPosition.TOP,
+      );
+      print(e);
     } finally {
-      isLoading.value = false; // Stop loading
+      isLoading.value = false;
     }
   }
 

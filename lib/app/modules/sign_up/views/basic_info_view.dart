@@ -23,6 +23,7 @@ class BasicInfoView extends StatefulWidget {
 
 class _BasicInfoViewState extends State<BasicInfoView> {
   final SignUpController _signUpController = Get.put(SignUpController());
+  final GlobalKey<FormState> _formKey= GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,131 +32,143 @@ class _BasicInfoViewState extends State<BasicInfoView> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.w),
-                child: Text(
-                  AppString.step1BasicInfoText,
-                  style: AppStyles.h1(color: AppColors.primaryColor),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.w),
+                  child: Text(
+                    AppString.step1BasicInfoText,
+                    style: AppStyles.h1(color: AppColors.primaryColor),
+                  ),
                 ),
-              ),
 
-              /// First name
-              verticalSpacing(10.h),
-              TextRequired(
-                text: AppString.firstNameText,
-                textStyle: AppStyles.h4(family: "Schuyler"),
-              ),
-              SizedBox(height: 10.h),
-              CustomTextField(
-                contentPaddingVertical: 15.h,
-                hintText: "Type your first name",
-                controller: _signUpController.firstNameCtrl,
-              ),
+                /// First name
+                verticalSpacing(10.h),
+                TextRequired(
+                  text: AppString.firstNameText,
+                  textStyle: AppStyles.h4(family: "Schuyler"),
+                ),
+                SizedBox(height: 10.h),
+                CustomTextField(
+                  contentPaddingVertical: 15.h,
+                  hintText: "Type your first name",
+                  controller: _signUpController.firstNameCtrl,
+                ),
 
-              /// Last name
-              verticalSpacing(10.h),
-              TextRequired(
-                text: AppString.lastNameText,
-                textStyle: AppStyles.h4(family: "Schuyler"),
-              ),
-              SizedBox(height: 10.h),
-              CustomTextField(
-                contentPaddingVertical: 15.h,
-                hintText: "Type your last name",
-                controller: _signUpController.lastNameCtrl,
-              ),
+                /// Last name
+                verticalSpacing(10.h),
+                TextRequired(
+                  text: AppString.lastNameText,
+                  textStyle: AppStyles.h4(family: "Schuyler"),
+                ),
+                SizedBox(height: 10.h),
+                CustomTextField(
+                  contentPaddingVertical: 15.h,
+                  hintText: "Type your last name",
+                  controller: _signUpController.lastNameCtrl,
+                ),
 
-              /// Branch
-              SizedBox(height: 15.h),
-              TextRequired(
-                text: AppString.branchText,
-                textStyle: AppStyles.h4(family: "Schuyler"),
-              ),
-              SizedBox(height: 10.h),
-              DropdownButtonFormField<String>(
-                value: _signUpController.branch,
-                padding: EdgeInsets.zero,
-                hint: const Text("Select Branch"),
-                items: _signUpController.branchList.map(
-                      (gender) => DropdownMenuItem<String>(
-                        value: gender,
-                        child: Text(gender),
-                      ),
-                    ).toList(),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Select Branch';
-                  }
-                  return null;
-                },
-                onChanged: (newValue) {
-                  setState(() {
-                    _signUpController.branch = newValue;
-                    print('Gender>>>${_signUpController.branch}');
-                  });
-                },
-              ),
+                /// Branch
+                SizedBox(height: 15.h),
+                TextRequired(
+                  text: AppString.branchText,
+                  textStyle: AppStyles.h4(family: "Schuyler"),
+                ),
+                SizedBox(height: 10.h),
+                DropdownButtonFormField<String>(
+                  value: _signUpController.branch,
+                  padding: EdgeInsets.zero,
+                  hint: const Text("Select Branch"),
+                  items: _signUpController.branchList.map(
+                        (gender) => DropdownMenuItem<String>(
+                          value: gender,
+                          child: Text(gender),
+                        ),
+                      ).toList(),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Select Branch';
+                    }
+                    return null;
+                  },
+                  onChanged: (newValue) {
+                    setState(() {
+                      _signUpController.branch = newValue;
+                      print('Gender>>>${_signUpController.branch}');
+                    });
+                  },
+                ),
 
-              /// Current status
-              SizedBox(height: 15.h),
-              TextRequired(
-                text: AppString.currentStatusText,
-                textStyle: AppStyles.h4(family: "Schuyler"),
-              ),
-              SizedBox(height: 15.h),
-              DropdownButtonFormField<String>(
-                value: _signUpController.currentStatus,
-                padding: EdgeInsets.zero,
-                hint: const Text("Select current status "),
-                items: _signUpController.currentStatusList
-                    .map(
-                      (gender) => DropdownMenuItem<String>(
-                        value: gender,
-                        child: Text(gender),
-                      ),
-                    )
-                    .toList(),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Select current status';
-                  }
-                  return null;
-                },
-                onChanged: (newValue) {
-                  setState(() {
-                    _signUpController.currentStatus = newValue;
-                    print('Gender>>>${_signUpController.currentStatus}');
-                  });
-                },
-              ),
+                /// Current status
+                SizedBox(height: 15.h),
+                TextRequired(
+                  text: AppString.currentStatusText,
+                  textStyle: AppStyles.h4(family: "Schuyler"),
+                ),
+                SizedBox(height: 15.h),
+                DropdownButtonFormField<String>(
+                  value: _signUpController.currentStatus,
+                  padding: EdgeInsets.zero,
+                  hint: const Text("Select current status "),
+                  items: _signUpController.currentStatusList
+                      .map(
+                        (gender) => DropdownMenuItem<String>(
+                          value: gender,
+                          child: Text(gender),
+                        ),
+                      )
+                      .toList(),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Select current status';
+                    }
+                    return null;
+                  },
+                  onChanged: (newValue) {
+                    setState(() {
+                      _signUpController.currentStatus = newValue;
+                      print('Gender>>>${_signUpController.currentStatus}');
+                    });
+                  },
+                ),
 
-              /// Full name
-              verticalSpacing(15.h),
-              Text(AppString.instagramOptionalText, style: AppStyles.h4(family: "Schuyler"),),
-              SizedBox(height: 10.h),
-              CustomTextField(
-                contentPaddingVertical: 15.h,
-                hintText: "Type your username",
-                controller: _signUpController.instagramNameCtrl,
-              ),
+                /// Full name
+                verticalSpacing(15.h),
+                Text(AppString.instagramOptionalText, style: AppStyles.h4(family: "Schuyler"),),
+                SizedBox(height: 10.h),
+                CustomTextField(
+                  contentPaddingVertical: 15.h,
+                  hintText: "Type your username",
+                  controller: _signUpController.instagramNameCtrl,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return null;
+                    }
+                    return null;
+                  },
+                ),
 
-              /// Action button
-              verticalSpacing(30.h),
-              CustomButton(
-                  onTap: (){
-                    Get.toNamed(Routes.ROLE_AND_PROFILE);
-               }, text: 'Next'),
+                /// Action button
+                verticalSpacing(30.h),
+                CustomButton(
+                    onTap: (){
+                      if(_formKey.currentState!.validate()){
+                        Get.toNamed(Routes.ROLE_AND_PROFILE);
+                      }
 
-              /// Route Sign-in Screen
-              SizedBox(height: 50.h),
-              HaveAnAccountTextButton(onTap: () {
-                Get.toNamed(Routes.SIGN_IN);
-              },),
-              verticalSpacing(40.h)
-            ],
+                 }, text: 'Next'),
+
+                /// Route Sign-in Screen
+                SizedBox(height: 50.h),
+                HaveAnAccountTextButton(onTap: () {
+                  Get.toNamed(Routes.SIGN_IN);
+                },),
+                verticalSpacing(40.h)
+              ],
+            ),
           ),
         ),
       ),

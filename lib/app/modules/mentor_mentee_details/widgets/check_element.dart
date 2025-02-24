@@ -24,10 +24,7 @@ class CheckBoxElement extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          taskTitle ?? '',
-          style: AppStyles.h4(),
-        ),
+        Text(taskTitle ?? '', style: AppStyles.h4(),),
         Obx(() {
           return Checkbox(
               activeColor: AppColors.primaryColor,

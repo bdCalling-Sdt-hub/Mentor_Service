@@ -4,9 +4,9 @@ class ApiConstants{
   static String googleBaseUrl="https://maps.googleapis.com/maps/api/place/autocomplete/json";
   static String estimatedTimeUrl="https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&";
 
-    static String baseUrl="http://206.81.15.114:5555/v1";// local //169 sahadat //186 sahinur
-    static String  imageBaseUrl="http://206.81.15.114:5555"; //Local //169 sahadat //186 sahinur
-    static String socketUrl="http://206.81.15.114:5000";
+    static String baseUrl="http://10.0.60.220:8081/api/v1";
+    static String  imageBaseUrl="http://10.0.60.220:8081";
+    static String socketUrl="http://10.0.60.220:8081";
 
   //static String baseUrl="http://dapperdriver.com:3030/api/v1";// live
 
@@ -19,13 +19,14 @@ class ApiConstants{
 
 ///>>>>>>>>>>>>>>>>>>>>>>>>>>> User Auth>>>>>>>>>>>>>>>>>>>
 
-static String registerUrl= '/auth/register';
-static String categoryUrl= '/users/category';
+static String registerUrl= '$baseUrl/auth/register';
+static String categoryUrl= '$baseUrl/users/category';
 static String emailSendUrl= '$baseUrl/auth/forgot-password';
-static String verifyEmailWithOtpUrl= '/auth/verify-email';
-static String logInUrl= '/auth/login';
-static String resetPasswordUrl= '/auth/reset-password';
-static String timelinePostUrl= '/post/home';
+static String resendOtpUrl= '$baseUrl/auth/resend-otp';
+static String verifyEmailWithOtpUrl= '$baseUrl/auth/verify-email';
+static String logInUrl= '$baseUrl/auth/login';
+static String resetPasswordUrl= '$baseUrl/auth/reset-password';
+static String timelinePostUrl= '$baseUrl/post/home';
 static String myPostUrl= '$baseUrl/post';
 static String createPostUrl= '$baseUrl/post';
 static String createGroupPostUrl= '$baseUrl/post';

@@ -7,8 +7,11 @@ import 'package:mentors_service/app/routes/app_pages.dart';
 import 'package:mentors_service/common/app_icons/app_icons.dart';
 import 'package:mentors_service/common/app_string/app_string.dart';
 import 'package:mentors_service/common/app_text_style/style.dart';
+import 'package:mentors_service/common/prefs_helper/prefs_helpers.dart';
 import 'package:mentors_service/common/url_luncher/externer_url_luncher.dart';
 import 'package:mentors_service/common/widgets/app_logo.dart';
+import 'package:mentors_service/common/widgets/custom_button.dart';
+import 'package:mentors_service/common/widgets/custom_outlinebutton.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -186,7 +189,7 @@ class AppDrawer extends StatelessWidget {
                   horizontalTitleGap: 20.w,
                   onTap: () {
                     Navigator.pop(context);
-                    Get.toNamed(Routes.HOME);
+                    showCustomDialog(context);
                   },
                 ),
               ]),
@@ -197,6 +200,34 @@ class AppDrawer extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+  void showCustomDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Logout",style: AppStyles.h2(),),
+          content: const Text("Are you sure you want to log out ?"),
+          actions: [
+            CustomOutlineButton(
+                width: 55,
+                onTap: (){
+                  Get.back();
+                }, text: 'No'),
+
+            CustomButton(
+                width: 55,
+                onTap: ()async{
+                  await PrefsHelper.remove('token');
+                  String token = await PrefsHelper.getString('token');
+                  if(token.isEmpty){
+                    Get.offAllNamed(Routes.SIGN_IN);
+                  }
+                }, text: 'Yes'),
+          ],
+        );
+      },
     );
   }
 }

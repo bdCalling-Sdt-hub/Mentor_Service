@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -6,16 +7,16 @@ import 'package:mentors_service/app/data/api_constants.dart';
 
 class ResendOtpController extends GetxController {
 
-  var isLoading = false.obs; // Observable loading state
+  var isLoading = false.obs;
 
-  Future<void> sendMail(bool? isResetPass) async {
+  Future<void> reSendMail(bool? isResetPass) async {
 
 
     if (isLoading.value) {
       return; // Prevent multiple taps
     }
 
-    isLoading.value = true; // Start loading
+    isLoading.value = true;
     Map<String, String> headers = {
       'Content-Type': 'application/json',
     };
@@ -24,32 +25,39 @@ class ResendOtpController extends GetxController {
       'email': Get.arguments['email'].toString(),
     };
 
-    print('Request URL: ${ApiConstants.emailSendUrl}');
-    print('Request Headers: ${headers.toString()}');
-    print('Request Body: ${jsonEncode(body)}');
-
     try {
-      final url = Uri.parse(ApiConstants.emailSendUrl);
+
+      final url = Uri.parse(ApiConstants.resendOtpUrl);
       final request = http.Request('POST', url)
         ..headers.addAll(headers)
         ..body = jsonEncode(body);
 
-      // Send the request and get the streamed response
       final streamedResponse = await request.send();
 
-      // Convert streamed response to a regular response
       final response = await http.Response.fromStream(streamedResponse);
+      var responseData = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        var responseData = jsonDecode(response.body);
         print('Response Data: $responseData');
+        Get.snackbar('Otp Resend', responseData['message']);
       } else {
         print('Error: ${response.statusCode}, Message: ${response.body}');
       }
-    } catch (e) {
-      print('Error during API call: $e');
+    } on SocketException catch (_) {
+      Get.snackbar(
+        'Error',
+        'No internet connection. Please check your network and try again.',
+        snackPosition: SnackPosition.TOP,
+      );
+    }catch(e){
+      Get.snackbar(
+        'Error',
+        'Something went wrong. Please try again later.',
+        snackPosition: SnackPosition.TOP,
+      );
+      print(e);
     } finally {
-      isLoading.value = false; // Stop loading
+      isLoading.value = false;
     }
   }
 
