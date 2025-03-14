@@ -7,7 +7,7 @@ import 'package:mentors_service/app/modules/home/model/schedule_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:mentors_service/common/prefs_helper/prefs_helpers.dart';
 
-class ScheduleListController extends GetxController {
+class ScheduleForAllController extends GetxController{
   Rx<ScheduleModel> scheduleModel = ScheduleModel().obs;
 
   RxString errorMessage = ''.obs;
@@ -90,5 +90,5 @@ class ScheduleListController extends GetxController {
       await fetchTodaySchedule(isLoadMore: true);
     }
   }
-
 }
+

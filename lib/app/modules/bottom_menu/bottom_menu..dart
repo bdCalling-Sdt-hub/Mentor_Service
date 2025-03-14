@@ -57,6 +57,7 @@ class _BottomMenuState extends State<BottomMenu> {
     return SizedBox(
       height: 80.h,
       child: ClipRRect(
+        clipBehavior: Clip.antiAlias,
         borderRadius:BorderRadius.only(topLeft: Radius.circular(40.r),topRight: Radius.circular(40.r) ),
         child: BottomNavigationBar(
             currentIndex: _selectedIndex, // Set the selected index

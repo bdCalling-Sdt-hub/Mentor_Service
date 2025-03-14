@@ -31,11 +31,8 @@ class _FindMentorMenteeViewState extends State<FindMentorMenteeView> {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: scaffoldKey,
-      bottomNavigationBar: BottomMenu(
-        2,
-        chooseMentorOrMentee: 'Mentee',
-        scaffoldKey: scaffoldKey,
-      ),
+      floatingActionButton: BottomMenu(2, chooseMentorOrMentee: 'Mentee', scaffoldKey: scaffoldKey),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       drawer: AppDrawer(),
       body: SafeArea(
         child: Padding(

@@ -4,10 +4,10 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:mentors_service/app/data/api_constants.dart';
 import 'package:mentors_service/app/modules/home/model/schedule_model.dart';
-import 'package:http/http.dart' as http;
 import 'package:mentors_service/common/prefs_helper/prefs_helpers.dart';
+import 'package:http/http.dart' as http;
 
-class ScheduleListController extends GetxController {
+class AllScheduleController extends GetxController {
   Rx<ScheduleModel> scheduleModel = ScheduleModel().obs;
 
   RxString errorMessage = ''.obs;
@@ -19,7 +19,7 @@ class ScheduleListController extends GetxController {
   RxInt totalPages = 1.obs;
 
 
-  fetchTodaySchedule( {bool isLoadMore = false }) async {
+  fetchSchedule({bool isLoadMore = false }) async {
     if (isLoadMore && isFetchingMore.value) return;
     if (isLoadMore) {
       isFetchingMore.value = true;
@@ -29,7 +29,7 @@ class ScheduleListController extends GetxController {
     }
 
     String token = await PrefsHelper.getString('token');
-    String url = '${ApiConstants.todayScheduleUrl}?page=${currentPage.value}&limit=${pageLimit.value}';
+    String url = '${ApiConstants.allUpcomingScheduleUrl}?page=${currentPage.value}&limit=${pageLimit.value}';
     Map<String, String> headers = {'Authorization': 'Bearer $token'};
 
     try {
@@ -87,8 +87,7 @@ class ScheduleListController extends GetxController {
   loadMorePage() async {
     if (currentPage.value < totalPages.value && !isFetchingMore.value) {
       currentPage.value += 1;
-      await fetchTodaySchedule(isLoadMore: true);
+      await fetchSchedule(isLoadMore: true);
     }
   }
-
 }

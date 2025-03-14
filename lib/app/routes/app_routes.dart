@@ -32,6 +32,7 @@ abstract class Routes {
   static const NOTIFICATION = _Paths.NOTIFICATION;
   static const MESSAGE = _Paths.MESSAGE;
   static const MESSAGE_INBOX = _Paths.MESSAGE_INBOX;
+  static const SCHEDULE_UPDATE = _Paths.SCHEDULE_UPDATE;
 }
 
 abstract class _Paths {
@@ -65,4 +66,5 @@ abstract class _Paths {
   static const NOTIFICATION = '/notification';
   static const MESSAGE = '/message';
   static const MESSAGE_INBOX = '/message-inbox';
+  static const SCHEDULE_UPDATE = '/schedule-update';
 }

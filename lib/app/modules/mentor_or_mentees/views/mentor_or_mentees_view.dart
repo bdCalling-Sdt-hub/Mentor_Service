@@ -35,7 +35,8 @@ class _MentorOrMenteesViewState extends State<MentorOrMenteesView> {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key:scaffoldKey ,
-      bottomNavigationBar: BottomMenu(1,chooseMentorOrMentee: 'Mentee', scaffoldKey: scaffoldKey,),
+      floatingActionButton: BottomMenu(1, chooseMentorOrMentee: 'Mentee', scaffoldKey: scaffoldKey),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       drawer: AppDrawer(),
       body: SafeArea(
         child: DefaultTabController(

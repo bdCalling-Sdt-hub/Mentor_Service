@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:mentors_service/app/modules/send_connection/bindings/send_message_binding.dart';
-import 'package:mentors_service/app/modules/send_connection/views/send_connection_view.dart';
 
 import '../modules/add_goal/bindings/add_goal_binding.dart';
 import '../modules/add_goal/views/add_goal_view.dart';
@@ -37,8 +35,12 @@ import '../modules/schedule_details/bindings/schedule_details_binding.dart';
 import '../modules/schedule_details/views/schedule_details_view.dart';
 import '../modules/schedule_list/bindings/schedule_list_binding.dart';
 import '../modules/schedule_list/views/schedule_list_view.dart';
+import '../modules/schedule_update/bindings/schedule_update_binding.dart';
+import '../modules/schedule_update/views/schedule_update_view.dart';
 import '../modules/search/bindings/search_binding.dart';
 import '../modules/search/views/find_mentor_mentee_view.dart';
+import '../modules/send_connection/bindings/send_message_binding.dart';
+import '../modules/send_connection/views/send_connection_view.dart';
 import '../modules/sign_in/bindings/sign_in_binding.dart';
 import '../modules/sign_in/views/sign_in_view.dart';
 import '../modules/sign_up/bindings/sign_up_binding.dart';
@@ -200,6 +202,11 @@ class AppPages {
       name: _Paths.MESSAGE_INBOX,
       page: () => const MessageInboxView(),
       binding: MessageInboxBinding(),
+    ),
+    GetPage(
+      name: _Paths.SCHEDULE_UPDATE,
+      page: () => const ScheduleUpdateView(),
+      binding: ScheduleUpdateBinding(),
     ),
   ];
 }
