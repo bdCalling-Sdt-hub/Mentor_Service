@@ -26,11 +26,11 @@ class _BottomMenuState extends State<BottomMenu> {
   }
 
   void _onItemTapped(int index) {
-
     if (_selectedIndex == index && index != 3) {
       // Prevent unnecessary re-navigation to the same screen
       return;
     }
+    FocusScope.of(context).unfocus();
     setState(() {
       _selectedIndex = index;
     });

@@ -39,9 +39,9 @@ class AllScheduleController extends GetxController {
       var response = await request.send();
       var responseBody = await response.stream.bytesToString();
       final responseData = jsonDecode(responseBody);
-      var dataList = (responseData['data']['attributes']['results'] as List<dynamic>);
       print(responseData);
       if (response.statusCode == 200) {
+        var dataList = (responseData['data']['attributes']['results'] as List<dynamic>);
         if (isLoadMore) {
           scheduleModel.value.data?.attributes?.results ??= [];
           scheduleModel.value.data?.attributes?.results?.addAll(dataList.map((data) => ScheduleResults.fromJson(data)));
@@ -53,7 +53,8 @@ class AllScheduleController extends GetxController {
       } else {
         print('Error>>>');
         isLoadingClub.value = false;
-        errorMessage.value = 'Failed to load data';
+        errorMessage.value = responseData['message'];
+
         Get.snackbar(
           'Error',
           errorMessage.value,

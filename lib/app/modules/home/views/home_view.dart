@@ -55,6 +55,7 @@ class _HomeViewState extends State<HomeView> {
       key: scaffoldKey,
       floatingActionButton: BottomMenu(0, chooseMentorOrMentee: 'Mentee', scaffoldKey: scaffoldKey),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      resizeToAvoidBottomInset: false,
       drawer: const AppDrawer(),
       body: SingleChildScrollView(
         child: SafeArea(

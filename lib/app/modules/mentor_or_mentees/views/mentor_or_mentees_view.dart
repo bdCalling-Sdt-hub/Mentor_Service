@@ -37,6 +37,7 @@ class _MentorOrMenteesViewState extends State<MentorOrMenteesView> {
       key:scaffoldKey ,
       floatingActionButton: BottomMenu(1, chooseMentorOrMentee: 'Mentee', scaffoldKey: scaffoldKey),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      resizeToAvoidBottomInset: false,
       drawer: AppDrawer(),
       body: SafeArea(
         child: DefaultTabController(

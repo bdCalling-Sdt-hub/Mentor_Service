@@ -33,6 +33,7 @@ class _FindMentorMenteeViewState extends State<FindMentorMenteeView> {
       key: scaffoldKey,
       floatingActionButton: BottomMenu(2, chooseMentorOrMentee: 'Mentee', scaffoldKey: scaffoldKey),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      resizeToAvoidBottomInset: false,
       drawer: AppDrawer(),
       body: SafeArea(
         child: Padding(

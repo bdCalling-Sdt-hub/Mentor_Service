@@ -4,8 +4,9 @@ class ApiConstants{
   static String googleBaseUrl="https://maps.googleapis.com/maps/api/place/autocomplete/json";
   static String estimatedTimeUrl="https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&";
 
-    static String baseUrl="http://10.0.60.220:8081/api/v1";
-    static String  imageBaseUrl="http://10.0.60.220:8081";
+    static String baseUrl="https://rakib8080.sobhoy.com/api/v1";
+    //static String baseUrl="http://10.0.60.220:8081/api/v1";
+    static String  imageBaseUrl="https://rakib8080.sobhoy.com/";
     static String socketUrl="http://10.0.60.220:8081";
 
   //static String baseUrl="http://dapperdriver.com:3030/api/v1";// live
@@ -28,7 +29,6 @@ static String logInUrl= '$baseUrl/auth/login';
 static String resetPasswordUrl= '$baseUrl/auth/reset-password';
 static String allUpcomingScheduleUrl= '$baseUrl/schedule/all-upcoming-schedules';
 static String todayScheduleUrl= '$baseUrl/schedule/mentor-today-schedules';
-
 
 
 static String  getProfileUrl (dynamic postId)=> '$baseUrl/users/$postId';
