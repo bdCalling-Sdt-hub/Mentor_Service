@@ -61,7 +61,8 @@ class _FindMentorMenteeViewState extends State<FindMentorMenteeView> {
               CustomSearchField(
                 searchCtrl: _findMentorMenteeController.searchCtrl,
                 onChanged: (value) async {
-                 await _findMentorMenteeController.fetchMentorMentee(value??'', userRole!);
+
+                 await _findMentorMenteeController.fetchMentorMentee(value??'', userRole=='mentee'?'mentor':'mentee');
 
                 },
                 fillColor: AppColors.primaryColor.withOpacity(0.1),
@@ -111,7 +112,7 @@ class _FindMentorMenteeViewState extends State<FindMentorMenteeView> {
               ),
               verticalSpacing(10.h),
               Obx((){
-                List<MentorMenteeFindAttributes> mentorMenteeList= _findMentorMenteeController.mentorMenteeFindModel.value.data?.attributes??[];
+                List<MentorMenteeFindAttributes> mentorMenteeList = _findMentorMenteeController.mentorMenteeFindModel.value.data?.attributes??[];
                  if(_findMentorMenteeController.isLoading2.value){
                    return const Center(child: CircularProgressIndicator());
                  } else if(mentorMenteeList.isEmpty){

@@ -30,6 +30,7 @@ static String resetPasswordUrl= '$baseUrl/auth/reset-password';
 static String allUpcomingScheduleUrl= '$baseUrl/schedule/all-upcoming-schedules';
 static String todayScheduleUrl= '$baseUrl/schedule/mentor-today-schedules';
 static String createScheduleUrl= '$baseUrl/schedule';
+static String sendConnectionUrl= '$baseUrl/connection/send-connection-request';
 static String  getProfileUrl (dynamic postId)=> '$baseUrl/users/$postId';
 static String  findMentorMenteeUrl (String name,String role) => '$baseUrl/user?userName=$name&role=$role';
 static String  scheduleGetUrl (String id)=> '$baseUrl/schedule/$id';

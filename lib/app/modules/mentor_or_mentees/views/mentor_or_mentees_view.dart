@@ -30,11 +30,12 @@ class _MentorOrMenteesViewState extends State<MentorOrMenteesView> {
   final SearchMentorMenteeController _searchMentorMenteeController=Get.put(SearchMentorMenteeController());
   final ScrollController _scrollController = ScrollController();
 
-  final List<String> tabBarList = ["My Mentor", "Request"];
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     String? userRole= UserService().userRole;
+    final List<String> tabBarList = [userRole=='mentor'? 'Mentee':'Mentor', "Request"];
     return Scaffold(
       key:scaffoldKey ,
       floatingActionButton: BottomMenu(1, chooseMentorOrMentee: userRole=='mentor'? 'Mentee':'Mentor', scaffoldKey: scaffoldKey),

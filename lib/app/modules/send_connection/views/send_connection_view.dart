@@ -1,16 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mentors_service/app/data/api_constants.dart';
+import 'package:mentors_service/app/data/external_url.dart';
 import 'package:mentors_service/app/modules/add_goal/views/add_goal_view.dart';
 import 'package:mentors_service/app/modules/search/model/find_mentor_mentee_model.dart';
+import 'package:mentors_service/app/modules/send_connection/controllers/send_connection_controller.dart';
 import 'package:mentors_service/app/routes/app_pages.dart';
 import 'package:mentors_service/common/app_color/app_colors.dart';
 import 'package:mentors_service/common/app_icons/app_icons.dart';
 import 'package:mentors_service/common/app_images/network_image%20.dart';
 import 'package:mentors_service/common/app_string/app_string.dart';
 import 'package:mentors_service/common/app_text_style/style.dart';
+import 'package:mentors_service/common/url_luncher/externer_url_luncher.dart';
 import 'package:mentors_service/common/widgets/app_custom_textOrIcon_button.dart';
 import 'package:mentors_service/common/widgets/custom_appBar_title.dart';
 import 'package:mentors_service/common/widgets/custom_button.dart';
@@ -27,7 +32,7 @@ class SendConnectionView extends StatefulWidget {
 }
 
 class _SendConnectionViewState extends State<SendConnectionView> {
-  TextEditingController msgTec = TextEditingController();
+  final SendConnectionController _connectionController = Get.put(SendConnectionController());
    MentorMenteeFindAttributes? mentorMenteeFindAttributes;
   @override
   void initState() {
@@ -84,15 +89,23 @@ class _SendConnectionViewState extends State<SendConnectionView> {
 
               CustomTextField(
                 filColor: AppColors.grayLight,
-                controller: msgTec,
+                controller: _connectionController.messageCtrl,
                 maxLine: 5,
                 hintText: 'Type a message...',
               ),
               verticalSpacing(16.h),
               AppCustomTextOrIconButton(
                 text: AppString.sendMessageText,
-                onTab: () {
-                  showConnectionSentDialog(context);
+                onTab: () async{
+                  String message = _connectionController.messageCtrl.text.trim();
+                  String email = mentorMenteeFindAttributes?.email??'';
+                  String emailUrl = "mailto:$email?body=${Uri.encodeFull(message)} ";
+                  if(mentorMenteeFindAttributes !=null && emailUrl.isNotEmpty){
+                   await _connectionController.sendConnection(mentorMenteeFindAttributes?.sId??'', _connectionController.messageCtrl.text,()async{
+                    return await ExternalUrlLauncher.lunchUrl(emailUrl.toString());
+                   });
+                  }
+                  //showConnectionSentDialog(context);
                 },
                 isIconWithTextActive: true,
                 iconPath: AppIcons.sentIcon,

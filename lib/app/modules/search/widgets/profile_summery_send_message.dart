@@ -22,7 +22,6 @@ class ProfileSummerySendMessage extends StatefulWidget {
 
 class _ProfileSummerySendMessageState extends State<ProfileSummerySendMessage> {
 
-   bool _isTextExpanded=false;
 
   @override
   Widget build(BuildContext context) {
