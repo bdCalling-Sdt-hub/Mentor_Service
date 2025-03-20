@@ -9,6 +9,7 @@ import 'package:mentors_service/app/modules/home/controllers/all_schedule_contro
 import 'package:mentors_service/app/modules/home/model/schedule_model.dart';
 import 'package:mentors_service/app/modules/mentor_mentee_details/widgets/schedule_list.dart';
 import 'package:mentors_service/app/routes/app_pages.dart';
+import 'package:mentors_service/app/utils/user_service.dart';
 import 'package:mentors_service/common/app_color/app_colors.dart';
 import 'package:mentors_service/common/app_constant/app_constant.dart';
 import 'package:mentors_service/common/app_drawer/app_drawer.dart';
@@ -39,7 +40,9 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((__) async {
+      await UserService().fetchRole();
       await _homeController.fetchSchedule();
+      print('==== UserRole -> ${UserService().userRole} <- =======');
     });
     _scrollController.addListener(() async {
       if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 200 && !_homeController.isFetchingMore.value) {
@@ -51,9 +54,10 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    String? userRole= UserService().userRole;
     return Scaffold(
       key: scaffoldKey,
-      floatingActionButton: BottomMenu(0, chooseMentorOrMentee: 'Mentee', scaffoldKey: scaffoldKey),
+      floatingActionButton: BottomMenu(0, chooseMentorOrMentee: userRole=='mentor'? 'Mentee':'Mentor', scaffoldKey: scaffoldKey),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       resizeToAvoidBottomInset: false,
       drawer: const AppDrawer(),
@@ -123,7 +127,7 @@ class _HomeViewState extends State<HomeView> {
                                 borderSideColor: AppColors.scheduleCardColor,
                                 children: [
                                   CustomNetworkImage(
-                                    imageUrl: '${ApiConstants.imageBaseUrl}/${scheduleResultsIndex.creator?.profileImage?.imageUrl}',
+                                    imageUrl: '${ApiConstants.imageBaseUrl}${scheduleResultsIndex.creator?.profileImage?.imageUrl}',
                                     boxShape: BoxShape.rectangle,
                                     height: 92.h,
                                     width: 91.w,
@@ -131,9 +135,15 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                                   Text('${scheduleResultsIndex.creator?.firstName}', style: AppStyles.h4()),
                                   const Spacer(),
-                                  IconText(iconData: Icons.calendar_month_outlined, text: DateFormat('EEE,dd MM').format(scheduleResultsIndex.appointmentDate!),), //Fri, 12 Sep
+                                  IconText(iconData: Icons.calendar_month_outlined,
+                                    text: DateFormat('EEE,dd MM').format(scheduleResultsIndex.appointmentDate!),
+                                    textStyle:  TextStyle(fontSize: 12.sp,color: Colors.grey),
+                                  ), //Fri, 12 Sep
                                   const Spacer(),
-                                  IconText(iconData: Icons.access_time_outlined, text: '${scheduleResultsIndex.appointmentTime}',),
+                                  IconText(iconData: Icons.access_time_outlined,
+                                    text: '${scheduleResultsIndex.appointmentTime}',
+                                    textStyle:  TextStyle(fontSize: 12.sp,color: Colors.grey),
+                                  ),
                                   const Spacer(),
                                 ],
                               ),

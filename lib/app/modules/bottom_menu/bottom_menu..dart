@@ -38,13 +38,13 @@ class _BottomMenuState extends State<BottomMenu> {
     // Navigate to corresponding pages
     switch (index) {
       case 0:
-        Get.offAndToNamed(Routes.HOME);
+        Get.offAllNamed(Routes.HOME);
         break;
       case 1:
-        Get.offAndToNamed(Routes.MENTOR_OR_MENTEES);
+        Get.offAllNamed(Routes.MENTOR_OR_MENTEES);
         break;
       case 2:
-        Get.offAndToNamed(Routes.SEARCH);
+        Get.offAllNamed(Routes.SEARCH);
         break;
       case 3:
         widget.scaffoldKey?.currentState!.openDrawer();

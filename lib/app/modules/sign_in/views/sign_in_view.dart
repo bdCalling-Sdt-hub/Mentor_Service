@@ -167,4 +167,10 @@ class _SignInViewState extends State<SignInView> {
       ],
     );
   }
+  @override
+  void dispose() {
+    _loginController.emailCtrl.clear();
+    _loginController.passCtrl.clear();
+    super.dispose();
+  }
 }

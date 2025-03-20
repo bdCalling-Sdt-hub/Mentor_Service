@@ -28,10 +28,14 @@ class OtpController extends GetxController {
       final responseData = jsonDecode( response.body);
       if (response.statusCode == 200) {
         Get.snackbar(responseData['message'], '');
-        String accessToken = responseData['data']['attributes']['result']['accessToken'];
+        String accessToken = responseData['data']['attributes']['result']['tokens']['accessToken'];
+        String userRole = responseData['data']['attributes']['result']['user']['role'];
+        await PrefsHelper.setString('userRole', userRole);
+        String role = await PrefsHelper.getString('userRole');
          await PrefsHelper.setString('token', accessToken);
         String token = await PrefsHelper.getString('token');
         print(token);
+        print(role);
         if(isResetPass==true){
            Get.toNamed(Routes.CHANGE_PASSWORD,arguments: {'email': Get.arguments['email']});
         }else{

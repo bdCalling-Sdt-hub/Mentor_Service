@@ -97,7 +97,7 @@ class _FilterViewState extends State<FilterView> {
                 }).toList() ,
               ),
 
-              /// Experience level
+           /*   /// Experience level
               SizedBox(height: 15.h),
               TextRequired(
                 text: 'Select Experience level',
@@ -127,7 +127,7 @@ class _FilterViewState extends State<FilterView> {
                     },
                   );
                 }).toList() ,
-              ),
+              ),*/
 
             ],
           ),

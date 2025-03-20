@@ -1,0 +1,2 @@
+/Users/quantumalliance/StudioProjects/Mentor_Service/android/app/.cxx/Debug/2r72d3d1/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/quantumalliance/StudioProjects/Mentor_Service/android/app/.cxx/Debug/2r72d3d1/armeabi-v7a/CMakeFiles/rebuild_cache.dir

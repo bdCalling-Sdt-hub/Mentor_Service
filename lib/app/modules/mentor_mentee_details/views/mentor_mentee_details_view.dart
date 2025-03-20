@@ -9,6 +9,7 @@ import 'package:mentors_service/common/app_icons/app_icons.dart';
 import 'package:mentors_service/common/app_images/network_image%20.dart';
 import 'package:mentors_service/common/app_string/app_string.dart';
 import 'package:mentors_service/common/app_text_style/style.dart';
+import 'package:mentors_service/common/prefs_helper/prefs_helpers.dart';
 import 'package:mentors_service/common/widgets/app_custom_textOrIcon_button.dart';
 import 'package:mentors_service/common/widgets/casess_network_image.dart';
 import 'package:mentors_service/common/widgets/custom_appBar_title.dart';
@@ -30,6 +31,21 @@ class MentorMenteeDetailsView extends StatefulWidget {
 class _MentorMenteeDetailsViewState extends State<MentorMenteeDetailsView> {
 
   final List<String> tabBarList = ["Schedule", "Goal"];
+
+  String? userRole;
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((__) async {
+      await getMyRole();
+    });
+  }
+  getMyRole()async{
+    String role = await PrefsHelper.getString('userRole');
+    setState(() {
+      userRole = role;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,19 +80,39 @@ class _MentorMenteeDetailsViewState extends State<MentorMenteeDetailsView> {
                   ),
                   const SizedBox(height: 16.0),
 
-                  /// Message Button
-                  AppCustomTextOrIconButton(
-                    height: 40.h,
-                    width: 112.w,
-                    textColor: Colors.white,
-                    iconColor: Colors.white,
-                    buttonColor: AppColors.primaryColor,
-                    text: AppString.messageText,
-                    onTab: (){
-                      Get.toNamed(Routes.SEND_MESSAGE);
-                    },
-                    isIconWithTextActive: true,
-                    iconPath: AppIcons.messageIcons,
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      /// Message Button
+                      AppCustomTextOrIconButton(
+                        height: 40.h,
+                        width: 112.w,
+                        textColor: Colors.white,
+                        iconColor: Colors.white,
+                        buttonColor: AppColors.primaryColor,
+                        text: AppString.messageText,
+                        onTab: (){
+                          Get.toNamed(Routes.SEND_MESSAGE);
+                        },
+                        isIconWithTextActive: true,
+                        iconPath: AppIcons.messageIcons,
+                      ),
+                      ///  add schedule
+                      if(userRole=='mentor')
+                        Flexible(
+                          flex: 2,
+                          child: CustomButton(
+                            height: 40.h,
+                            width: 75.w,
+                            text: 'Add Schedule',
+                            onTap: () {
+                              Get.toNamed(Routes.ADD_SCHEDULE);
+                            },
+
+                          ),
+                        )
+                    ],
                   ),
 
                   verticalSpacing(8.h),

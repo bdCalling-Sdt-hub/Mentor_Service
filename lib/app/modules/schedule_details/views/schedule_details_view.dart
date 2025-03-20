@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:mentors_service/app/data/api_constants.dart';
 import 'package:mentors_service/app/modules/home/model/schedule_model.dart';
 import 'package:mentors_service/app/routes/app_pages.dart';
+import 'package:mentors_service/app/utils/user_service.dart';
 import 'package:mentors_service/common/app_color/app_colors.dart';
 import 'package:mentors_service/common/app_icons/app_icons.dart';
 import 'package:mentors_service/common/app_images/network_image%20.dart';
@@ -43,6 +44,7 @@ class _ScheduleDetailsViewState extends State<ScheduleDetailsView> {
   }
   @override
   Widget build(BuildContext context) {
+    String? userRole= UserService().userRole;
     return Scaffold(
       appBar: const CustomAppBarTitle(text: 'Schedule Details'),
       body: Padding(
@@ -54,8 +56,8 @@ class _ScheduleDetailsViewState extends State<ScheduleDetailsView> {
           date: _scheduleResults.appointmentDate != null ? DateFormat('EE, dd.yyyy').format(_scheduleResults.appointmentDate!):'',
           name: '${_scheduleResults.creator?.firstName} ${_scheduleResults.creator?.lastName}',
           description: '${_scheduleResults.creator?.branch}',
-          imageUrl: '${ApiConstants.imageBaseUrl}/${_scheduleResults.creator?.profileImage?.imageUrl}',
-        ),
+          imageUrl: '${ApiConstants.imageBaseUrl}${_scheduleResults.creator?.profileImage?.imageUrl}',
+          ),
             verticalSpacing(6.h),
             Divider(height: 2.h,color: AppColors.grayLight,),
             verticalSpacing(6.h),
@@ -66,12 +68,13 @@ class _ScheduleDetailsViewState extends State<ScheduleDetailsView> {
               characterLimit: 150,
             ),
             verticalSpacing(18.h),
+            if(userRole=='mentor')
             AppCustomTextOrIconButton(
               text: 'Edit',
               containerVerticalPadding: 8,
               width: 100.w,
               onTab: () {
-                Get.toNamed(Routes.ADD_SCHEDULE,arguments: {'isEdit':true});
+                Get.toNamed(Routes.SCHEDULE_UPDATE, arguments: {'isEdit': true,'ScheduleId':_scheduleResults.sId});
               },
               isIconWithTextActive: true,
               iconPath: AppIcons.editLogo,

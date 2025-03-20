@@ -15,7 +15,7 @@ class AllScheduleController extends GetxController {
 
   RxBool isFetchingMore = false.obs;
   RxInt currentPage = 1.obs;
-  RxInt pageLimit = 4.obs;
+  RxInt pageLimit = 6.obs;
   RxInt totalPages = 1.obs;
 
 

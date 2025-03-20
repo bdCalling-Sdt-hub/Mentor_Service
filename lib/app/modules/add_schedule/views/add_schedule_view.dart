@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:mentors_service/app/modules/add_schedule/controllers/add_schedule_controller.dart';
 import 'package:mentors_service/common/app_color/app_colors.dart';
 import 'package:mentors_service/common/app_images/network_image%20.dart';
 import 'package:mentors_service/common/app_string/app_string.dart';
@@ -21,13 +22,8 @@ class AddScheduleView extends StatefulWidget {
 }
 
 class _AppointmentFormScreenState extends State<AddScheduleView> {
-  final TextEditingController dateController = TextEditingController();
-  final TextEditingController hourController = TextEditingController(text: "06");
-  final TextEditingController minuteController = TextEditingController(text: "00");
-  final TextEditingController linkController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
-  List<String> linkTypeList=['Zoom', 'Google Meet', 'Teams link','Meeting location'];
-  String selectedLinkType = "Zoom";
+
+  final AddScheduleController _addScheduleController= Get.put(AddScheduleController());
   bool isAM = true; // For AM/PM toggle
   bool isEdit=false;
 
@@ -41,11 +37,11 @@ class _AppointmentFormScreenState extends State<AddScheduleView> {
 
   @override
   void dispose() {
-    dateController.dispose();
-    hourController.dispose();
-    minuteController.dispose();
-    linkController.dispose();
-    descriptionController.dispose();
+    _addScheduleController.dateController.dispose();
+    _addScheduleController.hourController.dispose();
+    _addScheduleController.minuteController.dispose();
+    _addScheduleController.linkController.dispose();
+    _addScheduleController.descriptionController.dispose();
     super.dispose();
   }
 
@@ -54,27 +50,14 @@ class _AppointmentFormScreenState extends State<AddScheduleView> {
     isEdit=edit;
   }
 
-  void pickDate() async {
-    DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
-    );
-    if (pickedDate != null) {
-      setState(() {
-        dateController.text = DateFormat('MM/dd/yyyy').format(pickedDate);
-      });
-    }
-  }
 
   void onPublishPressed() {
-    String date = dateController.text.trim();
-    String hour = hourController.text.trim();
-    String minute = minuteController.text.trim();
-    String linkType = selectedLinkType;
-    String link = linkController.text.trim();
-    String description = descriptionController.text.trim();
+    String date = _addScheduleController.dateController.text.trim();
+    String hour = _addScheduleController.hourController.text.trim();
+    String minute = _addScheduleController.minuteController.text.trim();
+    String linkType = _addScheduleController.selectedLinkType;
+    String link = _addScheduleController.linkController.text.trim();
+    String description = _addScheduleController.descriptionController.text.trim();
     String amPm = isAM ? "AM" : "PM";
 
     // Handle your submission logic here
@@ -128,12 +111,14 @@ class _AppointmentFormScreenState extends State<AddScheduleView> {
               ),
               SizedBox(height: 8.h),
               TextField(
-                controller: dateController,
+                controller: _addScheduleController.dateController,
                 readOnly: true,
                 decoration: InputDecoration(
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.calendar_today_outlined),
-                    onPressed: pickDate,
+                    onPressed: (){
+                      _addScheduleController.pickDate(context);
+                    },
                   ),
                   hintText: 'MM/DD/YYYY',
                   border: OutlineInputBorder(
@@ -154,7 +139,7 @@ class _AppointmentFormScreenState extends State<AddScheduleView> {
                 children: [
                   /// Hour Input
                   Expanded(
-                    child: CustomTwoDigitsFormField(controller: hourController, digitValue: 12,),
+                    child: CustomTwoDigitsFormField(controller: _addScheduleController.hourController, digitValue: 12,),
                   ),
 
                   Padding(
@@ -166,7 +151,7 @@ class _AppointmentFormScreenState extends State<AddScheduleView> {
                   ),
                   /// Minute Input
                   Expanded(
-                    child: CustomTwoDigitsFormField(controller: minuteController, digitValue: 59,),
+                    child: CustomTwoDigitsFormField(controller: _addScheduleController.minuteController, digitValue: 59,),
                   ),
                   SizedBox(width: 8.w),
 
@@ -229,12 +214,12 @@ class _AppointmentFormScreenState extends State<AddScheduleView> {
               ),
               SizedBox(height: 8.h),
               DropdownButtonFormField<String>(
-                value: selectedLinkType,
-                items: linkTypeList.map((type) => DropdownMenuItem(value: type, child: Text(type)))
+                value: _addScheduleController.selectedLinkType,
+                items: _addScheduleController.linkTypeList.map((type) => DropdownMenuItem(value: type, child: Text(type)))
                     .toList(),
                 onChanged: (value) {
                   setState(() {
-                    selectedLinkType = value!;
+                    _addScheduleController.selectedLinkType = value!;
                   });
                 },
                 decoration: InputDecoration(
@@ -251,7 +236,7 @@ class _AppointmentFormScreenState extends State<AddScheduleView> {
                 textStyle: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),),
               SizedBox(height: 8.h),
               TextField(
-                controller: linkController,
+                controller: _addScheduleController.linkController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.link),
                   border: OutlineInputBorder(
@@ -269,7 +254,7 @@ class _AppointmentFormScreenState extends State<AddScheduleView> {
               ),
               SizedBox(height: 8.h),
               TextField(
-                controller: descriptionController,
+                controller: _addScheduleController.descriptionController,
                 maxLines: 3,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -280,7 +265,15 @@ class _AppointmentFormScreenState extends State<AddScheduleView> {
               ),
               SizedBox(height: 16.h),
               /// Publish Button
-              CustomButton(onTap: (){}, text: 'Publish'),
+              Obx((){
+                return CustomButton(
+                  loading: _addScheduleController.isLoading.value,
+                    onTap: ()async{
+                      await _addScheduleController.createSchedule(isAm: isAM);
+                    }, text: 'Publish');
+              }
+
+              ),
               verticalSpacing(16.h),
             ],
           ),

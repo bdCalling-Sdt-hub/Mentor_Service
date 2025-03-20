@@ -2,7 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mentors_service/app/data/api_constants.dart';
 import 'package:mentors_service/app/modules/add_goal/views/add_goal_view.dart';
+import 'package:mentors_service/app/modules/search/model/find_mentor_mentee_model.dart';
 import 'package:mentors_service/app/routes/app_pages.dart';
 import 'package:mentors_service/common/app_color/app_colors.dart';
 import 'package:mentors_service/common/app_icons/app_icons.dart';
@@ -14,6 +16,7 @@ import 'package:mentors_service/common/widgets/custom_appBar_title.dart';
 import 'package:mentors_service/common/widgets/custom_button.dart';
 import 'package:mentors_service/common/widgets/custom_text_field.dart';
 import 'package:mentors_service/common/widgets/profile_summery_card.dart';
+import 'package:mentors_service/common/widgets/see_more_text.dart';
 import 'package:mentors_service/common/widgets/spacing.dart';
 
 class SendConnectionView extends StatefulWidget {
@@ -25,8 +28,19 @@ class SendConnectionView extends StatefulWidget {
 
 class _SendConnectionViewState extends State<SendConnectionView> {
   TextEditingController msgTec = TextEditingController();
-  bool _isTextExpanded = false;
+   MentorMenteeFindAttributes? mentorMenteeFindAttributes;
+  @override
+  void initState() {
+    if(Get.arguments != null){
+      getMentorMenteeDetails();
+    }
+    super.initState();
+  }
 
+  getMentorMenteeDetails(){
+   final attributes  = Get.arguments['mentorMenteeAttributes'];
+   mentorMenteeFindAttributes = attributes;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,10 +54,10 @@ class _SendConnectionViewState extends State<SendConnectionView> {
               /// Profile Summery card
               verticalSpacing(8.h),
               ProfileSummeryCard(
-                date: '12.12.25',
-                name: 'Shuvo Kh',
-                description: 'navy',
-                imageUrl: AppNetworkImage.golfPlayerImg,
+                isDateActive: false,
+                name: "${mentorMenteeFindAttributes?.firstName} ${mentorMenteeFindAttributes?.lastName}",
+                description: '${mentorMenteeFindAttributes?.branch}',
+                imageUrl: '${ApiConstants.imageBaseUrl}${mentorMenteeFindAttributes?.profileImage?.imageUrl}',
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.h),
@@ -60,36 +74,7 @@ class _SendConnectionViewState extends State<SendConnectionView> {
               verticalSpacing(8.h),
 
               /// Description
-              Row(
-                children: [
-                  Expanded(
-                    child: RichText(
-                      softWrap: true,
-                      text: TextSpan(
-                        text: _isTextExpanded
-                            ? "This description is from the connection massage kjhkjhakjhkajshdjkshakjhd I am Shuvo alshdkajhsdkjs "
-                            : " This description is from the connection massage a kjhfkjsdhf",
-                        style: AppStyles.h5(color: Colors.black),
-                        children: [
-                          TextSpan(
-                              text: _isTextExpanded ? " See less" : " See more",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                // Replace with `AppStyles.h4()` equivalent
-                                fontSize: 14,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  setState(() {
-                                    _isTextExpanded = !_isTextExpanded;
-                                  });
-                                }),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              SeeMoreText(text: '${mentorMenteeFindAttributes?.description}'),
               verticalSpacing(16.h),
               Text(
                 AppString.messageText,

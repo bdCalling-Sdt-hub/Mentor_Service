@@ -8,6 +8,7 @@ import 'package:mentors_service/app/modules/mentor_or_mentees/controllers/search
 import 'package:mentors_service/app/modules/mentor_or_mentees/widgets/mentor_mentee_request_suggetion.dart';
 import 'package:mentors_service/app/modules/mentor_or_mentees/widgets/mentor_mentee_suggetion.dart';
 import 'package:mentors_service/app/routes/app_pages.dart';
+import 'package:mentors_service/app/utils/user_service.dart';
 import 'package:mentors_service/common/app_color/app_colors.dart';
 import 'package:mentors_service/common/app_drawer/app_drawer.dart';
 import 'package:mentors_service/common/app_icons/app_icons.dart';
@@ -33,9 +34,10 @@ class _MentorOrMenteesViewState extends State<MentorOrMenteesView> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    String? userRole= UserService().userRole;
     return Scaffold(
       key:scaffoldKey ,
-      floatingActionButton: BottomMenu(1, chooseMentorOrMentee: 'Mentee', scaffoldKey: scaffoldKey),
+      floatingActionButton: BottomMenu(1, chooseMentorOrMentee: userRole=='mentor'? 'Mentee':'Mentor', scaffoldKey: scaffoldKey),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       resizeToAvoidBottomInset: false,
       drawer: AppDrawer(),
