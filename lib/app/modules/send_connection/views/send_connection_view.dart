@@ -51,6 +51,7 @@ class _SendConnectionViewState extends State<SendConnectionView> {
     return Scaffold(
       appBar: const CustomAppBarTitle(text: 'Send Message'),
       body: SingleChildScrollView(
+
         child: Padding(
           padding: EdgeInsets.all(16.0.sp),
           child: Column(

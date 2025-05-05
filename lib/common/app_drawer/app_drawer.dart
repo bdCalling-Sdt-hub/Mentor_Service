@@ -47,7 +47,7 @@ class AppDrawer extends StatelessWidget {
                     AppString.profileText,
                     style: AppStyles.h3(),
                   ),
-                  leading: Icon(Icons.person_outline),
+                  leading: const Icon(Icons.person_outline),
                   horizontalTitleGap: 20.w,
                   onTap: () {
                     Navigator.pop(context);
@@ -59,12 +59,12 @@ class AppDrawer extends StatelessWidget {
                     AppString.eventText,
                     style: AppStyles.h3(),
                   ),
-                  leading: Icon(Icons.event_note_outlined),
+                  leading: const Icon(Icons.event_note_outlined),
                   horizontalTitleGap: 20.w,
                   trailing: Container(
                     height: 12.h,
                     width: 12.h,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.red,
                         shape: BoxShape.circle
                     ),
@@ -79,12 +79,12 @@ class AppDrawer extends StatelessWidget {
                     AppString.notificationText,
                     style: AppStyles.h3(),
                   ),
-                  leading: Icon(Icons.notifications_none_outlined),
+                  leading: const Icon(Icons.notifications_none_outlined),
                   horizontalTitleGap: 20.w,
                   trailing: Container(
                     height: 12.h,
                     width: 12.h,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.red,
                       shape: BoxShape.circle
                     ),
@@ -99,7 +99,7 @@ class AppDrawer extends StatelessWidget {
                     AppString.supportText,
                     style: AppStyles.h3(),
                   ),
-                  leading: Icon(Icons.contact_support_outlined),
+                  leading: const Icon(Icons.contact_support_outlined),
                   horizontalTitleGap: 20.w,
                   onTap: () {
                     Navigator.pop(context);
@@ -111,7 +111,7 @@ class AppDrawer extends StatelessWidget {
                     AppString.scheduleText,
                     style: AppStyles.h3(),
                   ),
-                  leading: Icon(Icons.schedule),
+                  leading: const Icon(Icons.schedule),
                   horizontalTitleGap: 20.w,
                   onTap: () {
                     Navigator.pop(context);
@@ -138,7 +138,7 @@ class AppDrawer extends StatelessWidget {
                     AppString.shopText,
                     style: AppStyles.h3(),
                   ),
-                  leading: Icon(Icons.shopping_cart_outlined),
+                  leading: const Icon(Icons.shopping_cart_outlined),
                   horizontalTitleGap: 20.w,
                   onTap: () {
                     Navigator.pop(context);
@@ -150,7 +150,7 @@ class AppDrawer extends StatelessWidget {
                     AppString.privacyPolicyText,
                     style: AppStyles.h3(),
                   ),
-                  leading: Icon(Icons.privacy_tip_outlined),
+                  leading: const Icon(Icons.privacy_tip_outlined),
                   horizontalTitleGap: 20.w,
                   onTap: () {
                     Navigator.pop(context);
